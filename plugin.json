@@ -1,9 +1,12 @@
 {
   "id": "nodebb-plugin-lightgallery",
-  "url": "https://github.com/june07/nodebb-plugin-lightgallery",
-  "library": "./library.js",
+  "url": "https://github.com/ariastel/nodebb-plugin-lightgallery",
+  "main": "./library.js",
   "hooks": [
-    { "hook": "filter:middleware.render", "method": "myfiltermethod" }
+    {
+      "hook": "filter:middleware.render",
+      "method": "renderLightGallery"
+    }
   ],
   "scripts": [
     "script.js"
@@ -16,17 +19,12 @@
     "jquery.js": "dist/plugins/jquery.min.js",
     "lg-autoplay.js": "dist/plugins/lg-autoplay.min.js",
     "lg-fullscreen.js": "dist/plugins/lg-fullscreen.min.js",
-    "lg-hash.js": "dist/plugins/lg-hash.min.js",
     "lg-pager.js": "dist/plugins/lg-pager.min.js",
-    "lg-share.js": "dist/plugins/lg-share.min.js",
-    "lg-thumbnail.js":"dist/plugins/lg-thumbnail.min.js",
-    "lg-video.js": "dist/plugins/lg-video.min.js",
+    "lg-thumbnail.js": "dist/plugins/lg-thumbnail.min.js",
     "lg-zoom.js": "dist/plugins/lg-zoom.min.js",
     "lightgallery.js": "dist/js/lightgallery.min.js"
   },
   "css": [
-   "dist/css/lightgallery.min.css"
+    "dist/css/lightgallery.min.css"
   ]
 }
-
-

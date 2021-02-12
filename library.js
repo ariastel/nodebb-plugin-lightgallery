@@ -1,37 +1,42 @@
-let cheerio = require('cheerio'),
-  debug = (process.env.NODE_ENV === 'dev') ? require('debug')('nodebb-plugin-lightgallery:library') : undefined;
+const cheerio = require('cheerio');
 
-module.exports.myfiltermethod = function myfiltermethod(data, callback) {
-  if (debug) debug('--------- myfiltermethod ---------');
+const LightGalleryPlugin = {};
+
+LightGalleryPlugin.renderLightGallery = function (data, callback) {
 
   if (data.templateData.posts !== undefined) {
-    let updatedPosts = data.templateData.posts.map(post => {
+    data.templateData.posts = data.templateData.posts.map(post => {
       return updatePost(post);
     });
-    data.templateData.posts = updatedPosts;
-    
-    return callback(null, data);
   }
-  function updatePost(post) {
-    let $ = cheerio.load('<div id="lg-post-wrapper' + post.pid + '">' + post.content + '</div>');
-    let lightgalleryWrapper = $('<div id="lightgallery' + post.pid + '"></div>');
 
-    if ($('p > img').length > 0) $('#lg-post-wrapper' + post.pid).wrap(lightgalleryWrapper);
+  return callback(null, data);
+
+  function updatePost(post) {
+
+    const $ = cheerio.load('<div id="lg-post-wrapper' + post.pid + '">' + post.content + '</div>');
+    const lightGalleryWrapper = $('<div id="lightgallery' + post.pid + '"></div>');
+
+    if ($('p > img').length > 0) {
+      $('#lg-post-wrapper' + post.pid).wrap(lightGalleryWrapper);
+    }
+
     $('p > img').map((i, e) => {
-      let imgsrc = $(e).attr('src');
-      let anchorWrapper = $('<a></a>');
+
+      const imgsrc = $(e).attr('src');
+
+      const anchorWrapper = $('<a></a>');
+      $(anchorWrapper).attr('href', imgsrc);
+
       $(e).attr('data-src', imgsrc);
       $(e).attr('data-exThumbImage', imgsrc);
-      $(anchorWrapper).attr('href', imgsrc);
       $(e).wrap(anchorWrapper);
     });
-    let html = $('body').html();
-    if (debug) debug('---------' + html + '---------');
-    post.content = html;
+
+    post.content = $('body').html();
+
     return post;
   }
-  return callback(null, data);
 }
-module.exports.filterUploadImage = function filterUploadImage(image, uid) {
-  debugger
-}
+
+module.exports = LightGalleryPlugin;

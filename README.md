@@ -21,8 +21,3 @@ Or in the case you want to contribute to the project, you can git clone/npm inst
 	```
 	git clone https://github.com/june07/nodebb-plugin-lightgallery.git
 	```
-
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbNzIzMTE2MzUwLC0yOTU5ODYzNzQsLTE3Mz
-I1ODczMSwtMTQyMzI1NjIzOF19
--->

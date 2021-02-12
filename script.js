@@ -1,17 +1,17 @@
-require(['jquery'], function($) {
-    require(['lightgallery'], function(lightgallery) {
-        require(['lg-thumbnail', 'lg-autoplay', 'lg-video', 'lg-fullscreen', 'lg-pager', 'lg-zoom', 'lg-hash', 'lg-share'], function(lgthumbnail, lgautoplay, lgvideo, lgfullscreen, lgpager, lgzoom, lghash, lgshare) {
-            $(document).ready(function() {
-            initLightGallery();
+require(['jquery'], function ($) {
+    require(['lightgallery'], function () {
+        require(['lg-thumbnail', 'lg-autoplay', 'lg-fullscreen', 'lg-pager', 'lg-zoom'], function () {
+            $(document).ready(function () {
+                initLightGallery();
             });
-            $(window).on('action:topic.loaded', function(data) {
-            initLightGallery();
+            $(window).on('action:topic.loaded', function () {
+                initLightGallery();
             });
             function initLightGallery() {
-            $("[id^=lightgallery]").lightGallery({
-                exThumbImage: 'data-exthumbimage',
-                selector: 'a > img'
-            });
+                $("[id^=lightgallery]").lightGallery({
+                    exThumbImage: 'data-exThumbImage',
+                    selector: 'a > img'
+                });
             }
         });
     });
